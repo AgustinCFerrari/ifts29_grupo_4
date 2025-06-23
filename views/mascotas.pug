@@ -12,6 +12,7 @@ html
           th Raza
           th Año de Nacimiento
           th Responsable
+          th Télefono
           th Acciones
       tbody
         each m in mascotas
@@ -21,6 +22,7 @@ html
             td #{m.raza}
             td #{m.anioNacimiento}
             td #{m.responsable}
+            td #{m.telefono}
             td
               a(href="/mascotas/" + m.id + "/editar", style="margin-right: 10px; display:inline-block")
                 button(type="button") Editar

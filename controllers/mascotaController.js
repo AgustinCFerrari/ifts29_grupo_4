@@ -43,23 +43,8 @@ export const actualizarMascota = async (req, res) => {
   }
 };
 
-
-// Controlador para eliminar una mascota por su ID
-export const eliminarMascota = async (req, res) => {
-  try {
-    // Elimina una mascota con el ID proporcionado
-    const resultado = await Mascota.deleteOne({ _id: req.params.id });
-    // Devuelve el resultado de la operación
-    res.json(resultado);
-  } catch (err) {
-    // Devuelve error si la eliminación falla
-    res.status(400).json({ error: err.message });
-  }
-};
-
-// =========================================
 // Buscador de Mascotas por nombre o especie
-// =========================================
+
 export const buscarMascotas = async (req, res) => {
   try {
     const { nombre, especie } = req.query;
@@ -76,9 +61,7 @@ export const buscarMascotas = async (req, res) => {
   }
 };
 
-// ============================================
 // Mostrar formulario de edición de una mascota
-// ============================================
 export const mostrarFormularioEditarMascota = async (req, res) => {
   try {
     const mascotas = await Mascota.findById(req.params.id);
@@ -99,27 +82,44 @@ export const mostrarFormularioHistoria = async (req, res) => {
 
 // Guardar cambios en historia clínica
 export const guardarHistoriaClinica = async (req, res) => {
-  const { veterinario, motivoConsulta, observaciones } = req.body;
+  const { motivoConsulta, observaciones } = req.body;
+
+  // Toma el nombre desde la sesión:
+  const veterinario = req.session?.usuario?.username || 'veterinario';
 
   // Busca la mascota
   const mascota = await Mascota.findById(req.params.id);
 
-  // Concatenar observaciones si ya existían
-  const nuevasObservaciones = mascota.observaciones
-    ? `${mascota.observaciones}\n${observaciones}`
-    : observaciones;
+  // Genera fecha actual
+  const fecha = new Date().toLocaleDateString('es-AR');
+  
+  // Concatena veterinario anterior con el nuevo
+  const nuevoVeterinario = mascota.veterinario
+    ? `${mascota.veterinario}\n${veterinario}`
+    : `${veterinario}`;
 
-  // Actualizar solo campos de historia clínica
+  // Concatena motivo de consultas anteriores
+  const nuevosMotivosConsulta = mascota.motivoConsulta
+    ? `${mascota.motivoConsulta}\n ${motivoConsulta}`
+    : `${motivoConsulta}`;
+
+  // Concatena observaciones anteriores con fecha  
+  const nuevasObservaciones = mascota.observaciones
+    ? `${mascota.observaciones}\n[${fecha}] ${observaciones}`
+    : `[${fecha}] ${observaciones}`;
+
   await Mascota.updateOne(
     { _id: req.params.id },
     {
       $set: {
-        veterinario,
-        motivoConsulta,
+        veterinario: nuevoVeterinario,
+        motivoConsulta: nuevosMotivosConsulta,
         observaciones: nuevasObservaciones
       }
     }
   );
 
-  res.redirect('/mascotas');
+  const mascotaActualizada = await Mascota.findById(req.params.id);
+  
+  res.render('editar_historia_clinica', { mascota: mascotaActualizada });
 };

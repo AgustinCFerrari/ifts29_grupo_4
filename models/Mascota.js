@@ -5,7 +5,11 @@ const mascotaSchema = new mongoose.Schema({
   especie: String,
   raza: String,
   anioNacimiento: Number,
-  responsable: String
+  responsable: String,
+  telefono: String,
+  veterinario: String,
+  motivoConsulta: String,
+  observaciones: String
 });
 
 export default mongoose.model('Mascota', mascotaSchema);

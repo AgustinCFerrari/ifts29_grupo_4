@@ -5,40 +5,42 @@ html
   body
     h1 Editar Historia Clínica
 
+    // Tabla con la info actual
+    table(border="1" cellpadding="2")
+      thead
+        tr
+          th Nombre
+          th Especie
+          th Raza
+          th Año de Nacimiento
+          th Responsable
+          th Teléfono
+          th Veterinario
+          th Motivo de la ultima consulta
+          th Observaciones Previas
+      tbody
+        tr
+          td #{mascota.nombre}
+          td #{mascota.especie}
+          td #{mascota.raza}
+          td #{mascota.anioNacimiento}
+          td #{mascota.responsable}
+          td #{mascota.telefono}
+          td !{mascota.veterinario.replace(/\n/g, '<br>')}
+          td !{mascota.motivoConsulta.replace(/\n/g, '<br>')}
+          td !{mascota.observaciones.replace(/\n/g, '<br>')}
+
+
+    hr
+
+    // Formulario para agregar nueva información
     form(action="/mascotas/" + mascota._id + "/editar-historia" method="POST")
-      label Nombre:
-      input(type="text" name="nombre" value=mascota.nombre readonly)
+      label Motivo de la nueva Consulta:
+      input(type="text" name="motivoConsulta" value="")
       br
-
-      label Especie:
-      input(type="text" name="especie" value=mascota.especie readonly)
-      br
-
-      label Raza:
-      input(type="text" name="raza" value=mascota.raza readonly)
-      br
-
-      label Año de Nacimiento:
-      input(type="number" name="anioNacimiento" value=mascota.anioNacimiento readonly)
-      br
-
-      label Responsable:
-      input(type="text" name="responsable" value=mascota.responsable readonly)
-      br
-
-      label Veterinario:
-      input(type="text" name="veterinario" value="Dra. Mariana" readonly)
-      br
-
-      label Motivo de la Consulta:
-      input(type="text" name="motivoConsulta" value=mascota.motivoConsulta)
-      br
-
       label Observaciones (agregar más info):
-      textarea(name="observaciones") #{mascota.observaciones}
+      textarea(name="observaciones" rows="6" cols="50")
       br
-
       button(type="submit") Guardar Cambios
-
-    br
-    a(href="/mascotas") Volver a la lista de mascotas
+      br
+      a(href="/mascotas") Volver a la lista de mascotas

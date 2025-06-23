@@ -1,14 +1,8 @@
 [
   {
-    "id": 1,
-    "precio": 4500,
-    "stock": 19,
-    "categoria": "Alimento para perros"
-  },
-  {
     "id": 2,
     "precio": 3800,
-    "stock": 15,
+    "stock": 16,
     "categoria": "Alimento para gatos"
   },
   {

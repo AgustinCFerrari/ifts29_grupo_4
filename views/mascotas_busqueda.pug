@@ -14,6 +14,8 @@ html
             th Raza
             th Año Nac.
             th Responsable
+            th Teléfono
+            TH Acciones
         tbody
           each m in mascotas
             tr
@@ -22,6 +24,10 @@ html
               td #{m.raza}
               td #{m.anioNacimiento}
               td #{m.responsable}
+              td #{m.telefono}
+              td
+                a(href="/mascotas/" + m.id + "/editar-historia")
+                  button(type="button") Historia Clínica
     else
       p No se encontraron resultados para los criterios de búsqueda.
       
