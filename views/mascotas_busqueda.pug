@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Resultados de Búsqueda de Mascotas
+  body
+    h1 Resultados de Búsqueda
+
+    if mascotas.length
+      table(border="1" cellpadding="2")
+        thead
+          tr
+            th Nombre
+            th Especie
+            th Raza
+            th Año Nac.
+            th Responsable
+        tbody
+          each m in mascotas
+            tr
+              td #{m.nombre}
+              td #{m.especie}
+              td #{m.raza}
+              td #{m.anioNacimiento}
+              td #{m.responsable}
+    else
+      p No se encontraron resultados para los criterios de búsqueda.
+      
+    hr
+    a(href="/formulario-busqueda") Nueva búsqueda
+    a(href="/mascotas", style="margin-left: 20px") Volver al listado completo
+    a(href="/menu", style="margin-left: 20px") Volver al menú

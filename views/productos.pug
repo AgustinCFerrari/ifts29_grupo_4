@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title Lista de Productos
+  body
+    h1 Productos
+
+    table(border="1" cellpadding="2")
+      thead
+        tr
+          th ID
+          th Precio
+          th Stock
+          th Categoría
+          th Acciones
+      tbody
+        each p in productos
+          tr
+            td #{p.id}
+            td $#{p.precio}
+            td #{p.stock}
+            td #{p.categoria}
+            td
+              a(href="/productos/" + p.id + "/editar" style="margin-right: 10px; display:inline-block")
+                button(type="button") Editar
+              form(action="/productos/" + p.id + "/eliminar" method="POST" style="display:inline-block")
+                button(type="submit") Eliminar
+
+
+    hr
+    a(href="/menu") Volver al menú
+    hr
+
+    h2 Agregar producto nuevo
+    form(action="/productos" method="POST")
+      label(for="id") ID:
+      input(type="number" name="id" required)
+      br
+      label(for="precio") Precio:
+      input(type="number" name="precio" required)
+      br
+      label(for="stock") Stock:
+      input(type="number" name="stock" required)
+      br
+      label(for="categoria") Categoría:
+      input(type="text" name="categoria" required)
+      br
+      button(type="submit") Crear

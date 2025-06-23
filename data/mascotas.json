@@ -1,0 +1,90 @@
+[
+  {
+    "id": 101,
+    "nombre": "Luna",
+    "especie": "Perro",
+    "raza": "Labrador",
+    "anioNacimiento": 2020,
+    "responsable": "Carlos Gómez"
+  },
+  {
+    "id": 102,
+    "nombre": "Milo",
+    "especie": "Gato",
+    "raza": "Siamés",
+    "anioNacimiento": 2021,
+    "responsable": "Ana Torres"
+  },
+  {
+    "id": 103,
+    "nombre": "Simba",
+    "especie": "Perro",
+    "raza": "Golden Retriever",
+    "anioNacimiento": 2019,
+    "responsable": "Lucía Rivas"
+  },
+  {
+    "id": 104,
+    "nombre": "Nala",
+    "especie": "Gato",
+    "raza": "Persa",
+    "anioNacimiento": 2022,
+    "responsable": "Tomás Vega"
+  },
+  {
+    "id": 105,
+    "nombre": "Max",
+    "especie": "Perro",
+    "raza": "Beagle",
+    "anioNacimiento": 2018,
+    "responsable": "Mariana Gagliardi"
+  },
+  {
+    "id": 106,
+    "nombre": "Cleo",
+    "especie": "Gato",
+    "raza": "Maine Coon",
+    "anioNacimiento": 2020,
+    "responsable": "Sofía Martínez"
+  },
+  {
+    "id": 108,
+    "nombre": "Kiara",
+    "especie": "Gato",
+    "raza": "Abisinio",
+    "anioNacimiento": 2019,
+    "responsable": "Julieta Fernández"
+  },
+  {
+    "id": 109,
+    "nombre": "Bruno",
+    "especie": "Perro",
+    "raza": "Caniche",
+    "anioNacimiento": 2021,
+    "responsable": "Ignacio Herrera"
+  },
+  {
+    "id": 110,
+    "nombre": "Lily",
+    "especie": "Gato",
+    "raza": "British Shorthair",
+    "anioNacimiento": 2023,
+    "responsable": "Martina Ruiz"
+  },
+  {
+    "id": "111",
+    "nombre": "Curry",
+    "especie": "Perro",
+    "raza": "Golden Toy",
+    "anioNacimiento": 2014,
+    "responsable": "Luis Fioravanti"
+  },
+  {
+    "id": "107",
+    "nombre": "Popy",
+    "especie": "Perro",
+    "raza": "Border Collie",
+    "anioNacimiento": 2014,
+    "responsable": "Tania Gialluca"
+  }
+]

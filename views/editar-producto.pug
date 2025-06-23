@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Editar Producto
+  body
+    h1 Editar producto
+    form(action="/productos/" + producto.id + "/editar" method="POST")
+      label(for="precio") Precio:
+      input(type="number" name="precio" value=producto.precio required)
+      br
+      label(for="stock") Stock:
+      input(type="number" name="stock" value=producto.stock required)
+      br
+      label(for="categoria") Categoría:
+      input(type="text" name="categoria" value=producto.categoria required)
+      br
+      button(type="submit") Guardar cambios

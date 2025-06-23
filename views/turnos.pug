@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title Lista de Turnos
+  body
+    h1 Turnos registrados
+    
+    table(border="1" cellpadding="2")
+      thead
+        tr
+          th Servicio
+          th Fecha
+          th Hora
+          th Mascota
+          th Dueño
+          th Acciones
+      tbody
+        each t in turnos
+          tr
+            td #{t.servicio}
+            td #{t.fecha}
+            td #{t.hora}
+            td #{t.mascota}
+            td #{t.duenio}
+            td
+              a(href="/turnos/" + t.id + "/editar", style="margin-right: 10px; display:inline-block")
+                button(type="button") Editar
+              form(action="/turnos/" + t.id + "/eliminar", method="POST", style="display:inline-block")
+                button(type="submit") Eliminar
+
+    hr
+    a(href="/menu") Volver al menú
+    hr
+    h2 Registrar nuevo turno
+    form(action="/turnos" method="POST")
+      br
+      label Servicio:
+      select(name="servicio")
+        option(value="veterinaria") Veterinaria
+        option(value="peluquería") Peluquería
+      br
+      label Fecha:
+      input(type="date" name="fecha" required)
+      br
+      label Hora:
+      input(type="time" name="hora" required)
+      br
+      label Mascota:
+      input(type="text" name="mascota" required)
+      br
+      label Dueño:
+      input(type="text" name="duenio" required)
+      br
+      button(type="submit") Crear

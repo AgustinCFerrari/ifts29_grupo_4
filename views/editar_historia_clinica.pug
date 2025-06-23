@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title Editar Historia Clínica
+  body
+    h1 Editar Historia Clínica
+
+    form(action="/mascotas/" + mascota._id + "/editar-historia" method="POST")
+      label Nombre:
+      input(type="text" name="nombre" value=mascota.nombre readonly)
+      br
+
+      label Especie:
+      input(type="text" name="especie" value=mascota.especie readonly)
+      br
+
+      label Raza:
+      input(type="text" name="raza" value=mascota.raza readonly)
+      br
+
+      label Año de Nacimiento:
+      input(type="number" name="anioNacimiento" value=mascota.anioNacimiento readonly)
+      br
+
+      label Responsable:
+      input(type="text" name="responsable" value=mascota.responsable readonly)
+      br
+
+      label Veterinario:
+      input(type="text" name="veterinario" value="Dra. Mariana" readonly)
+      br
+
+      label Motivo de la Consulta:
+      input(type="text" name="motivoConsulta" value=mascota.motivoConsulta)
+      br
+
+      label Observaciones (agregar más info):
+      textarea(name="observaciones") #{mascota.observaciones}
+      br
+
+      button(type="submit") Guardar Cambios
+
+    br
+    a(href="/mascotas") Volver a la lista de mascotas

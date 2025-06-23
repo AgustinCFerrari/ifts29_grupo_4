@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Editar Historia Clínica
+  body
+    h1 Editar Historia Clínica
+    form(action="/historias-clinicas/" + historia._id + "/editar" method="POST")
+      label ID:
+      input(type="text" name="id" value=historia.id readonly)
+      br
+      label Fecha:
+      input(type="date" name="fecha" value=historia.fecha required)
+      br
+      label Mascota:
+      input(type="text" name="mascota" value=historia.mascota required)
+      br
+      label Raza:
+      input(type="text" name="raza" value=historia.raza required)
+      br
+      label Edad:
+      input(type="number" name="edad" value=historia.edad required)
+      br
+      label Dueño:
+      input(type="text" name="duenio" value=historia.duenio required)
+      br
+      label Teléfono:
+      input(type="text" name="telefono" value=historia.telefono required)
+      br
+      label Veterinario:
+      input(type="text" name="veterinario" value=historia.veterinario required)
+      br
+      label Motivo Consulta:
+      input(type="text" name="motivoConsulta" value=historia.motivoConsulta required)
+      br
+      label Observaciones:
+      textarea(name="observaciones") #{historia.observaciones}
+      br
+      button(type="submit") Actualizar
+    a(href="/historias-clinicas") Volver a la lista

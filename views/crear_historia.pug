@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Crear Historia Clínica
+  body
+    h1 Crear Historia Clínica
+    form(action="/historias-clinicas/crear" method="POST")
+      label Fecha:
+      input(type="date" name="fecha" required)
+      br
+      label Mascota:
+      input(type="text" name="mascota" required)
+      br
+      label Raza:
+      input(type="text" name="raza" required)
+      br
+      label Edad:
+      input(type="number" name="edad" required)
+      br
+      label Dueño:
+      input(type="text" name="duenio" required)
+      br
+      label Teléfono:
+      input(type="text" name="telefono" required)
+      br
+      label Veterinario:
+      input(type="text" name="veterinario" required)
+      br
+      label Motivo Consulta:
+      input(type="text" name="motivoConsulta" required)
+      br
+      label Observaciones:
+      textarea(name="observaciones" required)
+      br
+      button(type="submit") Crear
+    a(href="/historias-clinicas") Volver a la lista

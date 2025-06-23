@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Buscar Mascotas
+  body
+    h1 Buscar Mascotas
+
+    form(action="/mascotas/buscar", method="GET")
+      label(for="nombre") Nombre:
+      input(type="text", name="nombre")
+      br
+      label(for="especie") Especie:
+      input(type="text", name="especie")
+      br
+      button(type="submit") Buscar
+
+    hr
+    a(href="/mascotas") Ver todas las mascotas
+    a(href="/menu" style="margin-left: 20px") Volver al menú

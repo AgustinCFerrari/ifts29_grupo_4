@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "servicio": "veterinaria",
+    "fecha": "2024-06-15",
+    "hora": "09:00",
+    "mascota": "Luna",
+    "duenio": "Carlos Pérez"
+  },
+  {
+    "id": 2,
+    "servicio": "peluquería",
+    "fecha": "2024-06-15",
+    "hora": "10:00",
+    "mascota": "Toby",
+    "duenio": "Lucía Rivas"
+  },
+  {
+    "id": 3,
+    "servicio": "veterinaria",
+    "fecha": "2024-06-16",
+    "hora": "11:30",
+    "mascota": "Milo",
+    "duenio": "Ana Torres"
+  },
+  {
+    "id": 4,
+    "servicio": "peluquería",
+    "fecha": "2024-06-16",
+    "hora": "13:00",
+    "mascota": "Nala",
+    "duenio": "Tomás Vega"
+  },
+  {
+    "id": 5,
+    "servicio": "veterinaria",
+    "fecha": "2024-06-17",
+    "hora": "15:00",
+    "mascota": "Kiara",
+    "duenio": "Julieta Fernández"
+  },
+  {
+    "id": 6,
+    "servicio": "peluquería",
+    "fecha": "2024-06-17",
+    "hora": "16:00",
+    "mascota": "Bruno",
+    "duenio": "Ignacio Herrera"
+  },
+  {
+    "id": 7,
+    "servicio": "veterinaria",
+    "fecha": "2024-06-18",
+    "hora": "08:30",
+    "mascota": "Lily",
+    "duenio": "Martina Ruiz"
+  },
+  {
+    "id": 8,
+    "servicio": "peluquería",
+    "fecha": "2024-06-18",
+    "hora": "12:00",
+    "mascota": "Cleo",
+    "duenio": "Sofía Martínez"
+  },
+  {
+    "id": 9,
+    "servicio": "veterinaria",
+    "fecha": "2024-06-19",
+    "hora": "14:00",
+    "mascota": "Simba",
+    "duenio": "Federico Díaz"
+  },
+  {
+    "id": "11",
+    "servicio": "peluquería",
+    "fecha": "2025-06-14",
+    "hora": "16:00",
+    "mascota": "Diana",
+    "duenio": "Julian Aguirre"
+  },
+  {
+    "id": "12",
+    "servicio": "veterinaria",
+    "fecha": "2025-06-20",
+    "hora": "15:00",
+    "mascota": "Popy",
+    "duenio": "Tania Gialluca"
+  }
+]

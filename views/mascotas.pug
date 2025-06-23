@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title Lista de Mascotas
+  body
+    h1 Mascotas registradas
+    table(border="1" cellpadding="2")
+      thead
+        tr
+          th Nombre
+          th Especie
+          th Raza
+          th Año de Nacimiento
+          th Responsable
+          th Acciones
+      tbody
+        each m in mascotas
+          tr
+            td #{m.nombre}
+            td #{m.especie}
+            td #{m.raza}
+            td #{m.anioNacimiento}
+            td #{m.responsable}
+            td
+              a(href="/mascotas/" + m.id + "/editar", style="margin-right: 10px; display:inline-block")
+                button(type="button") Editar
+              a(href="/mascotas/" + m.id + "/editar-historia")
+                button(type="button") Historia Clínica
+    hr
+    a(href="/formulario-busqueda") Ir a búsqueda de mascotas
+    a(href="/menu", style="margin-left: 20px") Volver al menú
+    hr
+    h2 Registrar nueva mascota
+    form(action="/mascotas" method="POST")
+      label(for="nombre") Nombre:
+      input(type="text" name="nombre" required)
+      br
+      label(for="especie") Especie:
+      input(type="text" name="especie" required)
+      br
+      label(for="raza") Raza:
+      input(type="text" name="raza" required)
+      br
+      label(for="anioNacimiento") Año de nacimiento:
+      input(type="number" name="anioNacimiento" required)
+      br
+      label(for="responsable") Responsable:
+      input(type="text" name="responsable" required)
+      br
+      button(type="submit") Registrar

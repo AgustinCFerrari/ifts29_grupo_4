@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title Editar Mascota
+  body
+    h1 Editar mascota
+    form(action="/mascotas/" + mascotas.id + "/editar" method="POST")
+      label(for="nombre") Nombre:
+      input(type="text" name="nombre" value=mascotas.nombre required)
+      br
+      label(for="especie") Especie:
+      input(type="text" name="especie" value=mascotas.especie required)
+      br
+      label(for="raza") Raza:
+      input(type="text" name="raza" value=mascotas.raza required)
+      br
+      label(for="anioNacimiento") Año de nacimiento:
+      input(type="number" name="anioNacimiento" value=mascotas.anioNacimiento required)
+      br
+      label(for="responsable") Responsable:
+      input(type="text" name="responsable" value=mascotas.responsable required)
+      br
+      button(type="submit") Guardar cambios
+      

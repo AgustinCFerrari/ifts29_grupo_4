@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title Historias Clínicas
+  body
+    h1 Lista de Historias Clínicas
+    table(border="2" cellpadding="5" cellspacing="2")
+      thead
+        tr
+          th Fecha de última consulta
+          th Mascota
+          th Especie
+          th Raza
+          th Edad
+          th Dueño
+          th Teléfono
+      tbody
+        each h in historiasClinicas
+          tr
+            td #{h.fecha}
+            td #{h.mascota}
+            td #{h.especie}
+            td #{h.raza}
+            td #{h.edad}
+            td #{h.duenio}
+            td #{h.telefono}
+            td
+              form(action="/historias-clinicas/" + h._id + "/editar" method="POST" style="display:inline")
+                button(type="submit") Editar
+            
+    a(href="/menu") 
+      button(type="submit") Volver al Menú Principal

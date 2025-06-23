@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title 
+    h1 Menú de opciones
+  body
+    h2 Seleccionar un enlace
+    ul
+      li: a(href="/productos") Ir a productos
+      li: a(href="/mascotas") Ir a mascotas
+      li: a(href="/turnos") Ir a turnos
+      li: a(href="/historias_clinicas") Ir a historia clínica
+
+    h3 Información del usuario
+    p Usuario: #{usuario.username}
+    p Rol: #{usuario.rol}
+
+    h4: a(href="/") Volver al login 
