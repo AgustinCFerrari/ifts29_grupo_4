@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Registro de usuario
+  body
+    h1 Registro de nuevo usuario
+
+    form(action="/registro" method="POST")
+      label Usuario:
+      input(type="text" name="username" required)
+      br
+      label Contraseña:
+      input(type="password" name="password" required)
+      br
+      label Rol:
+      select(name="rol")
+        option(value="veterinario") Veterinario
+        option(value="administrador") Administrador
+        option(value="empleado") Empleado
+      br
+      button(type="submit") Registrar

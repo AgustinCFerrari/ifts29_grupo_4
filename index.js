@@ -6,6 +6,7 @@
 // Importamos Express para crear el servidor web.
 import express from 'express';
 import session from 'express-session';
+import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -66,11 +67,6 @@ app.use((req, res, next) => {
   next();
 }); // Definimos la carpeta de vistas
 
-// Define que todas las rutas que empiecen con '/api/*******' serán manejadas por *******
-app.use(mascotaRoutes);
-app.use(turnoRoutes);
-
-
 // =================
 // LOGIN DEL SISTEMA
 // =================
@@ -85,23 +81,39 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const data = await readFile(USUARIOS_FILE, 'utf-8');
   const usuarios = JSON.parse(data);
-  const user = usuarios.find(u => u.username === username && u.password === password);
+  const user = usuarios.find(u => u.username === username);
   if (!user) return res.status(401).render('error-login', { mensaje: 'Usuario o contraseña incorrectos' });
+
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(401).render('error-login', { mensaje: 'Usuario o contraseña incorrectos' });
+  }
   // Guardar en sesión
   req.session.usuario = { username: user.username, rol: user.rol }; // Guarda usuario y rol en la sesión
   res.render('menu', { usuario: req.session.usuario, rol: user.rol });
 });
 
-/*// Middleware de Autorización por Rol
-function autorizar(rolesPermitidos) {
-  return (req, res, next) => {
-    const rol = req.session?.usuario?.rol; // simulación de rol por query string
-    if (!rol || !rolesPermitidos.includes(rol)) {
-      return res.status(403).render('error-autorizacion', { mensaje: 'Acceso denegado: rol insuficiente' });
-    }
-    next();
-  };
-}*/
+// Ruta de registro para crear usuario con bcrypt
+app.get('/registro', autorizar(['administrador']), (req, res) => {
+  res.render('registro');
+});
+
+app.post('/registro', async (req, res) => {
+  const { username, password, rol } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const data = await readFile(USUARIOS_FILE, 'utf-8');
+  const usuarios = JSON.parse(data);
+  usuarios.push({ username, password: hashedPassword, rol });
+
+  await writeFile(USUARIOS_FILE, JSON.stringify(usuarios, null, 2));
+  res.redirect('/');
+});
+
+// Define que todas las rutas que empiecen con '/api/*******' serán manejadas por *******
+app.use(mascotaRoutes);
+app.use(turnoRoutes);
+
 
 // Pantalla de Menú
 app.get('/menu', (req, res) => {
