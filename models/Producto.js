@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-const mascotaSchema = new mongoose.Schema({
+const productoSchema = new mongoose.Schema({
     precio: Number,
     stock: Number,
     categoria: String
 });
 
-export default mongoose.model('Producto', mascotaSchema);
+export default mongoose.model('Producto', productoSchema);

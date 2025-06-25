@@ -3,7 +3,7 @@ html
   head
     title Lista de Turnos
   body
-    h1 Turnos registrados
+    h2 Turnos registrados
     
     table(border="1" cellpadding="2")
       thead
@@ -27,11 +27,11 @@ html
                 button(type="button") Editar
               form(action="/turnos/" + t.id + "/eliminar", method="POST", style="display:inline-block")
                 button(type="submit") Eliminar
-
+    h3 
     hr
     a(href="/menu") Volver al menú
     hr
-    h2 Registrar nuevo turno
+    h2 Agregar de turnos
     form(action="/turnos" method="POST")
       br
       label Servicio:

@@ -3,23 +3,29 @@ html
   head
     title Editar Turno
   body
-    h1 Editar turno
-    form(action="/turnos/" + turnos._id + "/editar" method="POST")
-      label Servicio:
-      select(name="servicio")
-        option(value="veterinaria" selected=turnos.servicio === 'veterinaria') Veterinaria
-        option(value="peluquería" selected=turnos.servicio === 'peluquería') Peluquería
-      br
-      label Fecha:
-      input(type="date" name="fecha" value=turnos.fecha required)
-      br
-      label Hora:
-      input(type="time" name="hora" value=turnos.hora required)
-      br
-      label Mascota:
-      input(type="text" name="mascota" value=turnos.mascota required)
-      br
-      label Dueño:
-      input(type="text" name="duenio" value=turnos.duenio required)
-      br
-      button(type="submit") Guardar cambios
+    h2 Editar turno
+      h3
+      form(action="/turnos/" + turnos._id + "/editar" method="POST")
+        br
+        label Servicio : 
+        select(name="servicio")
+          option(value="veterinaria" selected=turnos.servicio === 'veterinaria') Veterinaria
+          option(value="peluquería" selected=turnos.servicio === 'peluquería') Peluquería
+        br
+        label Fecha :    
+        input(type="date" name="fecha" value=turnos.fecha required)
+        br
+        label Hora : 
+        input(type="time" name="hora" value=turnos.hora required)
+        br
+        label Mascota : 
+        input(type="text" name="mascota" value=turnos.mascota required)
+        br
+        label Dueño : 
+        input(type="text" name="duenio" value=turnos.duenio required)
+        br
+        button(type="submit") Guardar cambios
+        hr
+        a(href="/turnos") Volver Gestion de Turnos
+        hr
+   

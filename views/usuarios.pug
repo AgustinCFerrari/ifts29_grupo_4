@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title Gestión de Usuarios
+  body
+    h1 Gestión de Usuarios
+
+    table(border="1" cellpadding="2")
+      thead
+        tr
+          th Nombre
+          th Rol
+          th Acciones
+      tbody
+        each u in usuarios 
+          tr
+            td #{u.username}
+            td #{u.rol}
+            td
+              a(href="/usuarios/" + u._id + "/editar" style="margin-right: 10px; display:inline-block")
+                button(type="button") Editar
+              form(action="/usuarios/" + u._id + "/eliminar" method="POST" style="display:inline-block")
+                button(type="submit") Eliminar
+
+    hr
+    a(href="/") Volver al login
+    hr
+
+    h2 Registrar nuevo usuario
+    form(action="/usuarios" method="POST")
+      label Usuario:
+      input(type="text" name="username" required)
+      br
+      label Contraseña:
+      input(type="password" name="password" required)
+      br
+      label Rol:
+      select(name="rol")
+        option(value="veterinario") Veterinario
+        option(value="administrador") Administrador
+        option(value="empleado") Empleado
+      br
+      button(type="submit") Registrar
