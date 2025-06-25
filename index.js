@@ -10,9 +10,10 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Importamos las rutas de historias clínicas desde archivos separados.
+// Importamos las rutas de mascotas, turnos y productos desde archivos separados.
 import mascotaRoutes from './routes/mascotaRoutes.js';
 import turnoRoutes from './routes/turnoRoutes.js';
+import productoRutes from './routes/productoRoutes.js';
 
 // Importamos funciones de lectura y escritura de archivos
 // Estas funciones nos permiten leer y escribir datos en archivos 
@@ -21,9 +22,6 @@ import { readFile, writeFile } from 'fs/promises';
 
 // Cargamos las variables de entorno desde un archivo .env
 dotenv.config();
-
-// Importamos la clases Productos, Mascotas y Turnos desde un archivo separado.
-import Producto from './clases/Producto.js';
 
 // Creamos una instancia de la aplicación Express que manejará las peticiones.
 const app = express();
@@ -37,7 +35,6 @@ mongoose.connect(process.env.MONGO_URI) // Conecta a MongoDB usando la URI defin
   .catch(err => console.error(err));
 
 // Definimos la ruta de los archivos JSON que usaremos como "base de datos".
-const PRODUCTOS_FILE = './data/productos.json';
 const USUARIOS_FILE = './data/usuarios.json';
 
 // Importamos Middleware para autorizacion segun el rol del usuario
@@ -110,10 +107,10 @@ app.post('/registro', async (req, res) => {
   res.redirect('/');
 });
 
-// Define que todas las rutas que empiecen con '/api/*******' serán manejadas por *******
+// Define que todas las rutas 
 app.use(mascotaRoutes);
 app.use(turnoRoutes);
-
+app.use(productoRutes);
 
 // Pantalla de Menú
 app.get('/menu', (req, res) => {
@@ -121,87 +118,6 @@ app.get('/menu', (req, res) => {
     return res.redirect('/'); // volver al login si no está logueado
   }
   res.render('menu', { usuario: req.session.usuario });
-});
-
-// ================================
-// CRUD de Productos
-// ================================
-
-// Función para leer productos desde el archivo JSON
-const leerProductos = async () => {
-  try {
-    const data = await readFile(PRODUCTOS_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-};
-
-// Función para guardar productos en el archivo JSON
-const escribirProductos = async (data) => {
-  await writeFile(PRODUCTOS_FILE, JSON.stringify(data, null, 2));
-};
-
-// Ruta GET /productos 
-// Muestra el listado de productos y un formulario 
-// para agregar nuevos productos.
-app.get('/productos', async (req, res) => {
-  const productos = await leerProductos();
-  res.render('productos', { productos });
-});
-
-// Ruta GET /productos/:id  Muestra los detalles de un producto específico según su ID.
-app.get('/productos/:id', async (req, res) => {
-  const productos = await leerProductos();
-  const producto = productos.find(p => p.id == req.params.id);
-  if (!producto) return res.status(404).render('error-producto', { mensaje: 'Producto no encontrado' });
-  res.render('nuevo-producto', { producto });
-});
-
-// Ruta POST /productos Recibe los datos de un formulario 
-// y guarda un nuevo producto en el archivo JSON.
-app.post('/productos', async (req, res) => {
-  const { id, precio, stock, categoria } = req.body;
-  if (!id || !precio || !stock || !categoria) {
-    return res.status(400).render('error-producto', { mensaje: 'Faltan campos' });
-  }
-  const productos = await leerProductos();
-  if (productos.find(p => p.id == id)) {
-    return res.status(409).render('error-producto', { mensaje: 'ID existente' });
-  }
-  const nuevo = new Producto(parseInt(id), precio, stock, categoria);
-  productos.push(nuevo);
-  await escribirProductos(productos);
-  res.render('nuevo-producto', { producto: nuevo });
-});
-
-// Ruta GET /productos/:id/editar  Muestra el formulario para editar un producto específico.
-app.get('/productos/:id/editar', autorizar(['administrador']), async (req, res) => {
-  const productos = await leerProductos();
-  const producto = productos.find(p => p.id == req.params.id);
-  if (!producto) return res.status(404).render('error-producto', { mensaje: 'Producto no encontrado' });
-  res.render('editar_producto', { producto });
-});
-
-// Ruta POST /productos/:id/editar  Actualiza los datos del formulario de edición de un producto.
-app.post('/productos/:id/editar', async (req, res) => {
-  const { precio, stock, categoria } = req.body;
-  const productos = await leerProductos();
-  const index = productos.findIndex(p => p.id == req.params.id);
-  if (index === -1) return res.status(404).render('error-producto', { mensaje: 'Producto no encontrado' });
-  productos[index].precio = parseFloat(precio);
-  productos[index].stock = parseInt(stock);
-  productos[index].categoria = categoria;
-  await escribirProductos(productos);
-  res.redirect('/productos');
-});
-
-// Ruta POST /productos/:id/eliminar  Elimina un producto específico.
-app.post('/productos/:id/eliminar', autorizar(['administrador']), async (req, res) => {
-  const productos = await leerProductos();
-  const nuevos = productos.filter(p => p.id != req.params.id);
-  await escribirProductos(nuevos);
-  res.redirect('/productos');
 });
 
 // Iniciar servidor
