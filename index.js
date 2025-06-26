@@ -18,7 +18,6 @@ import usuarioRoutes from './routes/usuarioRoutes.js';
 // Importamos el controlador de usuario para manejar el login.
 import { login } from './controllers/usuarioController.js';
 
-
 // Cargamos las variables de entorno desde un archivo .env
 dotenv.config();
 

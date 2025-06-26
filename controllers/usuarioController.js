@@ -22,7 +22,7 @@ export const login = async (req, res) => {
     res.render('menu', { usuario: req.session.usuario });
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-autorizacion', { mensaje: err.message });
   }
 };
 
@@ -37,7 +37,7 @@ export const crearUsuario = async (req, res) => {
     const usuarios = await Usuario.find(); 
     res.render('usuarios', { usuarios });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-autorizacion', { mensaje: err.message });
   }
 };
 
@@ -47,7 +47,7 @@ export const obtenerUsuarios = async (req, res) => {
     const usuarios = await Usuario.find();
     res.render('usuarios', { usuarios });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-autorizacion', { mensaje: err.message });
   }
 };
 
@@ -63,7 +63,7 @@ export const actualizarUsuario = async (req, res) => {
     const usuarios = await Usuario.find();
     res.render('usuarios', { usuarios });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-autorizacion', { mensaje: err.message });
   }
 };
 
@@ -73,7 +73,7 @@ export const eliminarUsuario = async (req, res) => {
     const usuario = await Usuario.findById(req.params.id);
 
     if (!usuario) {
-      return res.status(404).send('Usuario no encontrado');
+      return res.status(404).render('error-autorizacion', { mensaje: err.message });
     }
 
     // Verificar si el usuario es administrador
@@ -82,14 +82,14 @@ export const eliminarUsuario = async (req, res) => {
 
       // Si hay solo un administrador, impedir eliminación
       if (cantidadAdmins <= 1) {
-        return res.status(400).send('No se puede eliminar al único administrador del sistema.');
+        return res.status(400).render('error-autorizacion', { mensaje: 'No se puede eliminar al único administrador del sistema.' });
       }
     }
 
     await Usuario.findByIdAndDelete(req.params.id);
     res.redirect('/usuarios');
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-autorizacion', { mensaje: err.message });
   }
 };
 
@@ -98,10 +98,10 @@ export const mostrarFormularioEditarUsuario = async (req, res) => {
   try {
     const usuarios = await Usuario.findById(req.params.id);
     if (!usuarios) {
-      return res.status(404).send('Usuario no encontrada');
+      return res.status(404).render('error-autorizacion', { mensaje: err.message });
     }
     res.render('editar_password', { usuarios });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-autorizacion', { mensaje: err.message });
   }
 };

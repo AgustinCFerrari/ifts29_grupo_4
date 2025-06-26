@@ -9,7 +9,7 @@ export const crearProducto = async (req, res) => {
     const productos = await Producto.find();  // recuperar toda la lista
     res.render('productos', { productos });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-producto', { mensaje: err.message });
   }
 };
 
@@ -21,8 +21,7 @@ export const obtenerProductos = async (req, res) => {
     // Devuelve la lista de productos
     res.render('productos', { productos });
   } catch (err) {
-    // En caso de error, devuelve un código 500 (Error interno del servidor)
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-producto', { mensaje: err.message });
   }
 };
 
@@ -39,7 +38,7 @@ export const actualizarProducto = async (req, res) => {
     // Renderiza la lista actualizada
     res.render('productos', { productos });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-producto', { mensaje: err.message });
   }
 };
 
@@ -52,7 +51,7 @@ export const eliminarProducto = async (req, res) => {
     res.redirect('/productos');
   } catch (err) {
     // Devuelve error si la eliminación falla
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-producto', { mensaje: err.message });
   }
 };
 
@@ -61,10 +60,10 @@ export const mostrarFormularioEditarProducto = async (req, res) => {
   try {
     const productos = await Producto.findById(req.params.id);
     if (!productos) {
-      return res.status(404).send('Producto no encontrada');
+      return res.status(404).send('Producto no encontrado');
     }
     res.render('editar_producto', { productos });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-producto', { mensaje: err.message });
   }
 };

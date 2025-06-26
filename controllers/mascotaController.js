@@ -9,20 +9,17 @@ export const crearMascota = async (req, res) => {
     const mascotas = await Mascota.find();  // recuperar toda la lista
     res.render('mascotas', { mascotas });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-mascota', { mensaje: err.message });
   }
 };
 
 // Controlador para obtener todas las mascotas registradas
 export const obtenerMascotas = async (req, res) => {
   try {
-    // Recupera todas las mascotas de la base de datos
     const mascotas = await Mascota.find();
-    // Devuelve la lista de mascotas
     res.render('mascotas', { mascotas });
   } catch (err) {
-    // En caso de error, devuelve un código 500 (Error interno del servidor)
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-mascota', { mensaje: err.message });
   }
 };
 
@@ -34,17 +31,14 @@ export const actualizarMascota = async (req, res) => {
       { _id: req.params.id },
       { $set: req.body }
     );
-    // Vuelve a recuperar la lista completa actualizada
     const mascotas = await Mascota.find();
-    // Renderiza la lista actualizada
     res.render('mascotas', { mascotas });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).render('error-mascota', { mensaje: err.message });
   }
 };
 
 // Buscador de Mascotas por nombre o especie
-
 export const buscarMascotas = async (req, res) => {
   try {
     const { nombre, especie } = req.query;
@@ -57,7 +51,7 @@ export const buscarMascotas = async (req, res) => {
     const mascotas = await Mascota.find(filtro);
     res.render('mascotas_busqueda', { mascotas });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-mascota', { mensaje: err.message });
   }
 };
 
@@ -70,7 +64,7 @@ export const mostrarFormularioEditarMascota = async (req, res) => {
     }
     res.render('editar_mascota', { mascotas });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).render('error-mascota', { mensaje: err.message });
   }
 };
 
